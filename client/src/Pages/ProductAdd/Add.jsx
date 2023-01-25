@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './Add.css'
+import {Link} from "react-router-dom";
 
 
 const Add = () => {
@@ -95,8 +96,8 @@ const Add = () => {
 			<header>
 			<h1>Products Add</h1>
 			<div>
-				<button >Save</button>
-				<button id="delete-product-btn">Cancel</button>
+				<button className='save'>Save</button>
+				<Link to='/'><button id="delete-product-btn">Cancel</button></Link>
 			</div>
 			</header>
 			<form id='product_form'>

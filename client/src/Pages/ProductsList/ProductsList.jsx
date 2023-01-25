@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from "../../Components/ProductCard.jsx"
 import './ProductsList.css'
+import {Link} from "react-router-dom"
 
 const ProductsList = () => {
 	return(
@@ -8,7 +9,7 @@ const ProductsList = () => {
 		<header>
 			<h1>Products List</h1>
 			<div>
-				<button >ADD</button>
+				<Link to="/add"><button >ADD</button></Link>
 				<button id="delete-product-btn">MASS DELETE</button>
 			</div>
 		</header>

@@ -29,7 +29,7 @@
     padding: 20px;
 }
 
-input {
+#product_form input {
     width: 15rem;
     height: 30px;
     border-radius: 5px;
@@ -47,4 +47,8 @@ select {
     width: 15rem;
     height: 30px;
     border-radius: 5px;
+}
+
+.save {
+    background-color: green;
 }
