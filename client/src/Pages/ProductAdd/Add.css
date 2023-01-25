@@ -1,0 +1,50 @@
+*{
+    font-family: sans-serif;
+}
+
+
+#product_form{
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.productdiscription {
+    margin: 1rem;
+    padding: 1rem;
+    width: 400px;
+    border-radius: 5px;
+}
+
+.productdiscription p {
+    padding-top: 20px;
+    margin-left: 40px;
+}
+
+.productdiscription input {
+    margin: 5px;
+}
+
+.input {
+    display: block;
+    padding: 20px;
+}
+
+input {
+    width: 15rem;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+label{
+    font-weight: 600;
+    width: 100px;
+    padding: 20px;
+    margin-right: 40px;
+}
+
+select {
+    width: 15rem;
+    height: 30px;
+    border-radius: 5px;
+}
