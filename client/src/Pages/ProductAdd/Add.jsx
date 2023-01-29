@@ -46,6 +46,7 @@ const Add = () => {
 		// console.log(product)
 	}
 	
+
 	//Handle type Change
 	const handleType = (e) => {
 		setProductType(e.target.value);
@@ -53,11 +54,11 @@ const Add = () => {
 	}
 
 	//Handling the submit of the data
-	let errorMesg
+	
 	const handlesubmit = (e) => {
 		e.preventDefault();
 		if(!Sku || !Name || !Price){
-			errorMesg = <p>please put input</p>
+			alert("Please, submit all required data");
 		}else{
 			axios.post("http://localhost:5000/api/post", {
 				Sku ,
@@ -111,7 +112,7 @@ const Add = () => {
 									value={product.Weight}
 									onChange={handleInput}
 								/>
-								<p><b>Please, provide Book weight in grams</b></p>
+								<p><b>Please, provide weight</b></p>
 								</div>
 	}else if (productType === 'furniture') {
 		display = <div className='productdiscription'>
@@ -123,6 +124,7 @@ const Add = () => {
 			value={product.Height}
 			onChange={handleInput}
 		/>
+		
 
 		<label htmlFor="width">Width</label>
 		<input type='number' 
@@ -132,6 +134,7 @@ const Add = () => {
 			value={product.Width}
 			onChange={handleInput}
 		/>
+		
 
 		<label htmlFor="length">Length</label>
 		<input type='number' 
@@ -141,7 +144,7 @@ const Add = () => {
 			value={product.Length}
 			onChange={handleInput}
 		/>
-		<p><b>Please, provide Furniture Measurement</b></p>
+		<p><b>Please, provide dimensions</b></p>
 		</div>
 	}
 	
@@ -163,7 +166,7 @@ const Add = () => {
 				{/* Sku input */}
 				<div className='input'>
 					<label htmlFor ='sku'>SKU</label>
-					<input required
+					<input 
 						type='text'
 						id='sku' 
 						name='Sku'
@@ -171,31 +174,34 @@ const Add = () => {
 						value={product.Sku}
 						onChange={handleInput}
 					/>
-					{errorMesg}
 				</div>
 
 				{/* Name input */}
 				<div className='input'>
 				<label htmlFor ='name'>Name</label>
-				<input type='text'
+				<input required
+					type='text'
 					id='name'
 					name='Name'
 					placeholder='NAME'
 					value={product.Name}
 					onChange={handleInput}
 				/>
+					
 				</div>
 
 				{/* Price input */}
 				<div className='input'>
-				<label htmlFor ='price'>Price</label>
-				<input type='number'
+				<label htmlFor ='price'>Price ($)</label>
+				<input required
+					type='number'
 					id='price'
 					name='Price'
 					placeholder='PRICE'
 					value={product.Price}
 					onChange={handleInput}
 				/>
+					
 				</div>
 
 				{/* TypeSwitcher to switch product type */}

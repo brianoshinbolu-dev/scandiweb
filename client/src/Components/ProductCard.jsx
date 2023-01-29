@@ -15,14 +15,12 @@ const ProductCard = (props) => {
 			{/* Product Details */}
 			<input type='checkbox' className='delete-checkbox' value={checkbox} checked={checkbox} onClick={() => handleChecked()}/>
 			<div className='product-info'>
-				<p>Sku: {Sku}</p>
-				<p>Name: {Name}</p>
-				<p>Price: ${Price}</p>
-				{Size && <p> Size: {Size}MB</p>}
-				{Weight && <p> Weight: {Weight}g</p>}
-				{Length && <p> Length: {Length}l</p>}
-				{Width && <p> Width: {Width}w</p>}
-				{Height && <p> Height: {Height}h</p>}
+				<p>{Sku}</p>
+				<p>{Name}</p>
+				<p>{Price}.00 $</p>
+				{Size && <p> Size: {Size} MB</p>}
+				{Length && Width && Height && <p>Dimension:{Height}x{Width}x{Length}</p>}
+				{Weight && <p> Weight: {Weight}KG</p>}
 			</div>
 		</div>
 		);
