@@ -1,37 +1,93 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Add.css'
-import {Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios"
 
 
 const Add = () => {
+	const history = useNavigate();
 
+	//State to keep record of the product type (book, disc or furnitur)
 	const [productType, setProductType] = useState("")
 
+	//State to temporaly store the info of product before sending to database
 	const [product, setProduct] = useState({
 		Sku : "",
 		Name : "",
 		Price : "",
 		Size : "",
+		Weight : "",
 		Length: "",
 		Width : "",
-		Height : ""
+		Height : "",
+		checkbox : false
 	})
 
+	//Destruturing of the product state
+	const {
+			Sku ,
+			Name,
+			Price,
+			Size,
+			Weight,
+			Length,
+			Width,
+			Height,
+			checkbox
+		} = product
+	
+	//handle all product input
 	const handleInput = (e) => {
 		const {name, value} = e.target
 		setProduct(prevProduct => ({
 			...prevProduct,
 			[name] : value
 		}))
-
-		console.log(product)
+		// console.log(product)
 	}
-
+	
+	//Handle type Change
 	const handleType = (e) => {
 		setProductType(e.target.value);
-		console.log(productType)
+		// console.log(productType)
 	}
-	 	
+
+	//Handling the submit of the data
+	let errorMesg
+	const handlesubmit = (e) => {
+		e.preventDefault();
+		if(!Sku || !Name || !Price){
+			errorMesg = <p>please put input</p>
+		}else{
+			axios.post("http://localhost:5000/api/post", {
+				Sku ,
+				Name,
+				Price,
+				Size,
+				Weight,
+				Length,
+				Width,
+				Height,
+			}).then(() => {
+				setProduct({
+					Sku : "",
+					Name : "",
+					Price : "",
+					Size : "",
+					Weight : "",
+					Length: "",
+					Width : "",
+					Height : ""
+				});
+			}).catch((err) => console.log(err.response.data));
+			setTimeout(() => {
+				history("/")
+			}, 500);
+		}
+		setProduct([])
+	}
+	
+	//Display for the product type selection
 	let display	
 	if(productType === 'dvd') {
 		display = <div className='productdiscription'>
@@ -55,7 +111,7 @@ const Add = () => {
 									value={product.Weight}
 									onChange={handleInput}
 								/>
-								<p><b>Please, provide Book weight</b></p>
+								<p><b>Please, provide Book weight in grams</b></p>
 								</div>
 	}else if (productType === 'furniture') {
 		display = <div className='productdiscription'>
@@ -85,33 +141,40 @@ const Add = () => {
 			value={product.Length}
 			onChange={handleInput}
 		/>
-		<p><b>Please, provide Furniture weight</b></p>
+		<p><b>Please, provide Furniture Measurement</b></p>
 		</div>
 	}
-
+	
 
 
 	return (
 		<div className='container'>
+			{/* Header */}
 			<header>
 			<h1>Products Add</h1>
 			<div>
-				<button className='save'>Save</button>
+				<button className='save' onClick={handlesubmit}>Save</button>
 				<Link to='/'><button id="delete-product-btn">Cancel</button></Link>
 			</div>
 			</header>
+
+			{/* Form */}
 			<form id='product_form'>
+				{/* Sku input */}
 				<div className='input'>
 					<label htmlFor ='sku'>SKU</label>
-					<input type='text'
+					<input required
+						type='text'
 						id='sku' 
 						name='Sku'
 						placeholder='SKU'
 						value={product.Sku}
 						onChange={handleInput}
 					/>
+					{errorMesg}
 				</div>
 
+				{/* Name input */}
 				<div className='input'>
 				<label htmlFor ='name'>Name</label>
 				<input type='text'
@@ -123,6 +186,7 @@ const Add = () => {
 				/>
 				</div>
 
+				{/* Price input */}
 				<div className='input'>
 				<label htmlFor ='price'>Price</label>
 				<input type='number'
@@ -134,6 +198,7 @@ const Add = () => {
 				/>
 				</div>
 
+				{/* TypeSwitcher to switch product type */}
 				<div className='input'>
 				<label htmlFor='productType'>Type Switcher</label>
 				<select value={productType} onChange={handleType}>
@@ -144,9 +209,17 @@ const Add = () => {
 				</select>
 				</div>
 
+				{/* Display of the product type */}
 				<div >
 					{display}
 				</div>
+
+				
+				<footer>
+					<p>
+						Scandiweb Test assignment
+					</p>
+				</footer>
 			</form>
 		</div>
 		)

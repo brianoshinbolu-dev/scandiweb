@@ -29,6 +29,10 @@
     padding: 20px;
 }
 
+.input label{
+    
+}
+
 #product_form input {
     width: 15rem;
     height: 30px;
@@ -40,7 +44,7 @@ label{
     font-weight: 600;
     width: 100px;
     padding: 20px;
-    margin-right: 40px;
+    margin-right: auto;
 }
 
 select {
